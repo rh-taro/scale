@@ -1,0 +1,17 @@
+version: '3'
+volumes:
+  node_modules:
+services:
+  app:
+    build: .
+    ports:
+      - 10000:10000
+    environment:
+      - PORT=10000
+      - HOST=0.0.0.0
+    volumes:
+      - .:/usr/src/app:delegated
+      - node_modules:/usr/src/app/node_modules
+    stdin_open: true
+    tty: true
+    command: /bin/sh -c 'yarn install; /bin/sh'
